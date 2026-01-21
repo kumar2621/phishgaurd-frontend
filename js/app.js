@@ -67,3 +67,67 @@ function showResult(message, type) {
 
     result.innerHTML = message;
 }
+
+/* ===== CONTACT FORM SUBMISSION ===== */
+/* ===== CONTACT FORM SUBMISSION ===== */
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const sendBtn = form?.querySelector("button");
+
+    if (!form) {
+        console.error("contactForm not found");
+        return;
+    }
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !email || !message) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.innerText = "Sending...";
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
+
+        try {
+            const response = await fetch(
+                "https://phishguard-backend-a8yw.onrender.com/api/feedback",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name, email, message }),
+                    signal: controller.signal
+                }
+            );
+
+            clearTimeout(timeout);
+
+            if (!response.ok) {
+                throw new Error("Server error");
+            }
+
+            alert("✅ Message sent successfully!");
+            form.reset();
+
+        } catch (err) {
+            if (err.name === "AbortError") {
+                alert("❌ Server timeout. Please try again later.");
+            } else {
+                alert("❌ Failed to send message.");
+            }
+        } finally {
+            sendBtn.disabled = false;
+            sendBtn.innerText = "Send";
+        }
+    });
+});
