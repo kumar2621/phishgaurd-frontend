@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhishGuard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">PhishGuard</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="home" class="section home">
+    <div class="home-card">
+        <h1>Phishing Link Detector</h1>
+
+        <div class="input-row">
+            <input type="text" id="url" placeholder="Paste the website URL here">
+            <button class="check-btn" onclick="checkUrl()">Check</button>
+        </div>
+
+        <p id="result"></p>
+    </div>
+</section>
+
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section about">
+    <div class="about-wrapper">
+
+        <div class="about-card">
+            <h2>About Me</h2>
+            <p>
+                Hi, I’m <b>Kumar Yash</b>, a cybersecurity enthusiast with a strong
+                interest in ethical hacking, threat detection, and defensive
+                security systems. I enjoy building practical security tools
+                that solve real-world problems using a combination of
+                programming, networking, and machine learning.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h2>About This Project</h2>
+            <p>
+                <b>PhishGuard</b> is a machine learning–based phishing detection
+                system designed to analyze URLs and identify potential phishing
+                attacks in real time. Instead of relying on traditional
+                blacklists, the system extracts meaningful features from a
+                given URL and evaluates its structural and behavioral patterns.
+            </p>
+
+            <p>
+                The model uses <b>48 handcrafted features</b> including URL
+                length, entropy, domain structure, presence of sensitive
+                keywords, brand impersonation, and protocol-level indicators.
+                These features are passed into a trained classification model
+                to determine whether a URL is legitimate or potentially
+                malicious.
+            </p>
+
+            <p>
+                This project demonstrates how machine learning can be
+                effectively applied to cybersecurity for early detection and
+                prevention of phishing attacks.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section contact">
+    <div class="contact-card">
+
+        <h2>Contact Me</h2>
+
+        <div class="contact-form">
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="email" id="email" placeholder="Your Email">
+            <textarea id="message" placeholder="Your Feedback"></textarea>
+
+            <button onclick="sendFeedback()">Send Feedback</button>
+            <p id="contact-result"></p>
+        </div>
+
+        <div class="socials">
+            <a href="https://github.com/kumar2621" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kumar-yash-aaaa5b288" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/_.kumaryash._" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:kumaryash2621@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+
+    </div>
+</section>
+<script src="js/app.js"></script>
+</body>
+</html>
