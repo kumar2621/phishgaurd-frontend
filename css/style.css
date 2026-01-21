@@ -1,3 +1,4 @@
+/* ===== GLOBAL RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +7,12 @@
     scroll-behavior: smooth;
 }
 
+/* ===== BODY ===== */
 body {
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100svh;
 }
 
 /* ===== NAVBAR ===== */
@@ -16,53 +20,57 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 15px 60px;
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 5vw, 40px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.65);
     backdrop-filter: blur(10px);
     z-index: 1000;
 }
 
 .logo {
-    font-size: 22px;
+    font-size: clamp(18px, 4vw, 22px);
     font-weight: bold;
     letter-spacing: 1px;
 }
 
+/* ===== NAV LINKS ===== */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: clamp(16px, 4vw, 30px);
 }
 
 .nav-links a {
     color: #00d4ff;
     text-decoration: none;
     font-weight: 500;
-    transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: #ffffff;
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    color: #00d4ff;
+    cursor: pointer;
 }
 
 /* ===== SECTIONS ===== */
 .section {
-    min-height: 100vh;
-    padding: 140px 20px;
+    min-height: 100svh;
+    padding: clamp(100px, 15vw, 140px) clamp(16px, 5vw, 30px);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* ===== HOME CARD (WIDE) ===== */
+/* ===== HOME CARD ===== */
 .home-card {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 64rem;
     background: rgba(0, 0, 0, 0.55);
-    padding: 60px;
+    padding: clamp(28px, 6vw, 60px);
     border-radius: 18px;
     border: 1px solid rgba(0, 212, 255, 0.35);
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
@@ -71,101 +79,83 @@ body {
 }
 
 .home-card h1 {
-    font-size: 38px;
-    margin-bottom: 35px;
-    color: #ffffff;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    margin-bottom: 30px;
 }
 
-/* INPUT + BUTTON ROW */
-/* INPUT + BUTTON ROW (FIXED) */
+/* ===== INPUT ROW ===== */
 .input-row {
     display: flex;
-    align-items: stretch; /* 🔥 MOST IMPORTANT LINE */
-    gap: 15px;
+    gap: 14px;
+    flex-wrap: wrap;
 }
 
 .input-row input {
-    flex: 1;
-    padding: 18px 20px;
-    font-size: 17px;
+    flex: 1 1 260px;
+    padding: 16px;
+    font-size: 1rem;
     border-radius: 10px;
     border: none;
     outline: none;
 }
 
-/* CHECK BUTTON */
 .input-row button {
-    padding: 18px 28px;
-    font-size: 17px;
+    flex: 0 0 auto;
+    padding: 16px 26px;
+    font-size: 1rem;
     font-weight: bold;
     border-radius: 10px;
     border: none;
     background: #00d4ff;
     color: #000;
     cursor: pointer;
-    min-width: 150px;
-    transition: 0.3s ease;
+    min-height: 48px;
 }
 
-.input-row button:hover {
-    background: #00b8dd;
+.input-row button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
-
-/* RESULT TEXT */
+/* ===== RESULT ===== */
 #result {
-    margin-top: 25px;
-    font-size: 18px;
-    font-weight: 600;
+    margin-top: 24px;
 }
 
-/* ===== ABOUT SECTION (CARD STYLE – FIXED & CLEAN) ===== */
-/* ===================================================== */
-
+/* ===== ABOUT ===== */
 .about-wrapper {
     width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    max-width: 64rem;
+    display: grid;
+    gap: clamp(24px, 5vw, 40px);
 }
 
 .about-card {
     background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
-    padding: 50px;
+    padding: clamp(26px, 5vw, 50px);
     border-radius: 18px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.65);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.85);
 }
 
 .about-card h2 {
-    font-size: 34px;
-    margin-bottom: 20px;
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    margin-bottom: 18px;
     color: #00d4ff;
 }
 
 .about-card p {
-    font-size: 18px;
-    line-height: 1.9;
-    margin-bottom: 22px;
-    opacity: 0.95;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+    line-height: 1.8;
+    margin-bottom: 18px;
     text-align: justify;
-    text-justify: inter-word;
 }
 
-/* ===== CONTACT SECTION ===== */
-/* ===== CONTACT CARD ===== */
+/* ===== CONTACT ===== */
 .contact-card {
-    width: 90%;
-    max-width: 900px;
+    width: 100%;
+    max-width: 56rem;
     background: rgba(0, 0, 0, 0.55);
-    padding: 60px;
+    padding: clamp(28px, 6vw, 60px);
     border-radius: 18px;
     border: 1px solid rgba(0, 212, 255, 0.3);
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
@@ -173,103 +163,89 @@ body {
     text-align: center;
 }
 
-.contact-card h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #00d4ff;
-}
-
-/* FORM LAYOUT */
+/* ===== CONTACT FORM (FIXED) ===== */
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    width: 100%;
+    display: grid;
+    gap: 16px;
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 16px;
-    font-size: 16px;
+    max-width: 100%;
+    padding: 14px;
+    font-size: 1rem;
     border-radius: 8px;
     border: none;
-    outline: none;
 }
 
 .contact-form textarea {
+    resize: vertical;
     min-height: 120px;
-    resize: none;
 }
 
 .contact-form button {
+    width: 100%;
     background: #00d4ff;
     color: #000;
-    font-size: 16px;
     font-weight: bold;
     padding: 14px;
     border-radius: 8px;
-    cursor: pointer;
     border: none;
+    cursor: pointer;
 }
 
-
-/* ===== SOCIAL LINKS ===== */
+/* ===== SOCIAL ICONS ===== */
 .socials {
-    margin-top: 30px;
+    margin-top: 28px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
 }
 
 .socials a {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     color: #00d4ff;
-    text-decoration: none;
-    padding: 10px 20px;
     border: 1px solid #00d4ff;
-    border-radius: 20px;
-    transition: 0.3s;
+    border-radius: 50%;
+    font-size: 1.2rem;
+
+    transition: all 0.3s ease;
 }
 
 .socials a:hover {
     background: #00d4ff;
     color: #000;
+    transform: translateY(-4px) scale(1.05);
 }
 
-@media (max-width: 768px) {
-    .input-row {
-        flex-direction: column;
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: block;
     }
 
-    .input-row button {
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
         width: 100%;
+        background: rgba(0,0,0,0.9);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        display: none;
     }
 
-    .home-card {
-        padding: 40px 25px;
-    }
-
-    .home-card h1 {
-        font-size: 30px;
+    .nav-links.active {
+        display: flex;
     }
 }
-
-/* ===== RESULT : CARD ALERT STYLE ===== */
-.result-card {
-    margin-top: 30px;
-    padding: 18px 22px;
-    border-radius: 14px;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: fadeIn 0.4s ease;
-}
-
-.safe-card {
-    background: rgba(46, 204, 113, 0.15);
-    border-left: 6px solid #2ecc71;
-    color: #2ecc71;
-    box-shadow: 0 0 15px rgba(46, 204, 113, 0.35)
