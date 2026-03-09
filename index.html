@@ -2,146 +2,104 @@
 <html lang="en">
 
 <head>
-    <meta name="google-adsense-account" content="ca-pub-5237312487637452">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5237312487637452"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <title>PhishGuard</title>
+<meta name="google-adsense-account" content="ca-pub-5237312487637452">
 
-    <!-- Mobile responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5237312487637452"
+crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PhishGuard</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-    <div class="logo">PhishGuard</div>
+<div class="logo">PhishGuard</div>
 
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-    <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="privacy.html">Privacy</a></li>
+</ul>
 </nav>
 
 
-<!-- ===== HOME ===== -->
-<section id="home" class="section">
+<section class="section">
 
-    <div class="home-card">
+<div class="home-card">
 
-        <h1>Phishing URL Detection</h1>
-
-        <div class="input-row">
-            <input type="text" id="url" placeholder="Enter URL to check">
-            <button class="check-btn" onclick="checkUrl()">Check</button>
-        </div>
-
-        <!-- RESULT BOX -->
-        <div id="resultBox">
-            <h2 id="result"></h2>
-            <h3 id="confidence"></h3>
-        </div>
-
-    </div>
-
-</section>
+<h1>Phishing URL Detection</h1>
 
 
-<!-- ===== ABOUT ===== -->
-<section id="about" class="section about">
 
-    <div class="about-wrapper">
+<div class="input-row">
+<input type="text" id="url" placeholder="Enter URL to check">
+<button class="check-btn" onclick="checkUrl()">Check</button>
+</div>
 
-        <div class="about-card">
+<div id="resultBox">
+<h2 id="result"></h2>
+<h3 id="confidence"></h3>
+</div>
 
-            <h2>About Me</h2>
-
-            <p>
-                Hi, I'm <b>Kumar Yash</b>, a cybersecurity enthusiast with a strong
-                interest in ethical hacking, threat detection, and defensive
-                security systems.
-            </p>
-
-            <p>
-                I enjoy building practical security tools that solve real-world
-                problems using programming, networking, and machine learning.
-            </p>
-
-        </div>
-
-
-        <div class="about-card">
-
-            <h2>About This Project</h2>
-
-            <p>
-                <b>PhishGuard</b> is a machine learning–based phishing detection
-                system designed to analyze URLs and identify phishing attacks
-                in real time.
-            </p>
-
-            <p>
-                The model evaluates <b>48 handcrafted security features</b>
-                including URL length, entropy, domain structure,
-                sensitive keywords, impersonation patterns,
-                and protocol indicators.
-            </p>
-
-            <p>
-                This project demonstrates how machine learning
-                can be applied to modern cybersecurity challenges.
-            </p>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
 
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="section">
+<section class="section about">
 
-    <div class="contact-card">
+<div class="about-wrapper">
 
-        <h2>Contact Me</h2>
+<div class="about-card">
 
-        <div class="socials">
+<h2>What is Phishing?</h2>
 
-            <a href="https://github.com/kumar2621">
-                <i class="fab fa-github"></i>
-            </a>
+<p>
+Phishing is a cyberattack where attackers impersonate trusted websites
+to steal login credentials, banking details, and personal information.
+</p>
 
-            <a href="https://www.linkedin.com/in/kumar-yash-aaaa5b288/">
-                <i class="fab fa-linkedin"></i>
-            </a>
+<p>
+These attacks often involve fake login pages, misleading domain names,
+and malicious links designed to trick users.
+</p>
 
-            <a href="https://x.com/kumaryash2621?s=21">
-                <i class="fab fa-x-twitter"></i>
-            </a>
+</div>
 
-            <a href="https://www.instagram.com/_.kumaryash._">
-                <i class="fab fa-instagram"></i>
-            </a>
 
-            <a href="mailto:kumaryash2621@gmail.com">
-                <i class="fas fa-envelope"></i>
-            </a>
+<div class="about-card">
 
-        </div>
+<h2>How PhishGuard Helps</h2>
 
-    </div>
+<p>
+PhishGuard analyzes URLs using machine learning models trained
+on phishing datasets and evaluates multiple security features
+to detect suspicious patterns.
+</p>
+
+<p>
+This allows users to quickly determine whether a website
+may be safe or potentially malicious.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
-<script src="../js/app.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
