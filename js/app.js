@@ -4,6 +4,7 @@ function toggleMenu() {
     nav.classList.toggle("active");
 }
 
+<<<<<<< HEAD
 
 /* ===== PHISHING CHECK ===== */
 async function checkUrl() {
@@ -19,6 +20,15 @@ async function checkUrl() {
 
     const url = urlInput.value.trim();
 
+=======
+/* ===== PHISHING CHECK ===== */
+async function checkUrl() {
+    const urlInput = document.getElementById("url");
+    const result = document.getElementById("result");
+    const button = document.querySelector(".check-btn");
+
+    const url = urlInput.value.trim();
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
     const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$/i;
 
     if (!url) {
@@ -33,6 +43,7 @@ async function checkUrl() {
 
     button.disabled = true;
     button.innerText = "Checking...";
+<<<<<<< HEAD
 
     result.innerText = "⏳ Analyzing URL...";
     confidence.innerText = "";
@@ -144,20 +155,57 @@ async function checkUrl() {
 /* ===== RESULT UI HANDLER ===== */
 function showResult(message, type) {
 
+=======
+    showResult("⏳ Checking URL...", "phishing");
+
+    try {
+        const response = await fetch(
+            "https://phishguard-backend-a8yw.onrender.com/api/predict",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.prediction === "Safe") {
+            showResult("🛡️ SAFE URL", "safe");
+        } else {
+            showResult("⚠️ PHISHING DETECTED", "phishing");
+        }
+
+    } catch (error) {
+        showResult("❌ Backend not reachable", "phishing");
+    } finally {
+        button.disabled = false;
+        button.innerText = "Check";
+    }
+}
+
+/* ===== RESULT UI HANDLER ===== */
+function showResult(message, type) {
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
     const result = document.getElementById("result");
 
     result.className = "result-card";
 
     if (type === "safe") {
         result.classList.add("safe-card");
+<<<<<<< HEAD
     }
     else {
+=======
+    } else {
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
         result.classList.add("phishing-card");
     }
 
     result.innerHTML = message;
 }
 
+<<<<<<< HEAD
 
 
 /* ===== CONTACT FORM ===== */
@@ -171,6 +219,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", async function (e) {
 
+=======
+/* ===== CONTACT FORM SUBMISSION ===== */
+/* ===== CONTACT FORM SUBMISSION ===== */
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const sendBtn = form?.querySelector("button");
+
+    if (!form) {
+        console.error("contactForm not found");
+        return;
+    }
+
+    form.addEventListener("submit", async function (e) {
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
         e.preventDefault();
 
         const name = document.getElementById("name").value.trim();
@@ -185,23 +247,47 @@ document.addEventListener("DOMContentLoaded", function () {
         sendBtn.disabled = true;
         sendBtn.innerText = "Sending...";
 
+<<<<<<< HEAD
         try {
 
+=======
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
+
+        try {
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
             const response = await fetch(
                 "https://phishguard-backend-a8yw.onrender.com/api/feedback",
                 {
                     method: "POST",
+<<<<<<< HEAD
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, email, message })
                 }
             );
 
             if (!response.ok) throw new Error("Server error");
+=======
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name, email, message }),
+                    signal: controller.signal
+                }
+            );
+
+            clearTimeout(timeout);
+
+            if (!response.ok) {
+                throw new Error("Server error");
+            }
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
 
             alert("✅ Message sent successfully!");
             form.reset();
 
         } catch (err) {
+<<<<<<< HEAD
 
             alert("❌ Failed to send message.");
 
@@ -215,3 +301,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+=======
+            if (err.name === "AbortError") {
+                alert("❌ Server timeout. Please try again later.");
+            } else {
+                alert("❌ Failed to send message.");
+            }
+        } finally {
+            sendBtn.disabled = false;
+            sendBtn.innerText = "Send";
+        }
+    });
+});
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff

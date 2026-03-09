@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
 <meta charset="UTF-8">
@@ -10,10 +11,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
+=======
+<head>
+    <meta charset="UTF-8">
+    <title>PhishGuard</title>
+
+    <!-- REQUIRED FOR ALL MOBILE TYPES -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
 <body>
 
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
+<<<<<<< HEAD
 <div class="logo">PhishGuard</div>
 
 <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -150,3 +164,86 @@ can be applied to modern cybersecurity challenges.
 
 </body>
 </html>
+=======
+    <div class="logo">PhishGuard</div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="section">
+    <div class="home-card">
+        <h1>Phishing URL Detection</h1>
+
+        <div class="input-row">
+            <input type="text" id="url" placeholder="Enter URL to check">
+            <button class="check-btn" onclick="checkUrl()">Check</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section about">
+    <div class="about-wrapper">
+
+        <div class="about-card">
+            <h2>About Me</h2>
+            <p>
+                Hi, I’m <b>Kumar Yash</b>, a cybersecurity enthusiast with a strong
+                interest in ethical hacking, threat detection, and defensive
+                security systems. I enjoy building practical security tools
+                that solve real-world problems using a combination of
+                programming, networking, and machine learning.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h2>About This Project</h2>
+            <p>
+                <b>PhishGuard</b> is a machine learning–based phishing detection
+                system designed to analyze URLs and identify potential phishing
+                attacks in real time.
+            </p>
+
+            <p>
+                The model uses <b>48 handcrafted features</b> including URL
+                length, entropy, domain structure, sensitive keywords,
+                impersonation patterns, and protocol indicators.
+            </p>
+
+            <p>
+                This project demonstrates how machine learning can be
+                effectively applied to cybersecurity.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section">
+    <div class="contact-card">
+        <h2>Contact Us On</h2>
+        
+        <div class="socials">
+            <a href="https://github.com/kumar2621"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kumar-yash-aaaa5b288/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/kumaryash2621?s=21"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/_.kumaryash._?igsh=YmZhMGg3cWMyNHdt&utm_source=qr"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:kumaryash2621@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+
+    </div>
+</section>
+<script src="../js/app.js"></script>
+</body>
+</html>
+>>>>>>> 16176ba02b242f474604ea47986dd35f45f7c5ff
