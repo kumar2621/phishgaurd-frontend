@@ -1,6 +1,7 @@
 /* ===== NAVBAR MOBILE TOGGLE ===== */
+
 function toggleMenu() {
-    const nav = document.getElementById("navLinks");
+    const nav = document.getElementById("nav-links");
     nav.classList.toggle("active");
 }
 
