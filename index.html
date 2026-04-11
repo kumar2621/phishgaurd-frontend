@@ -10,24 +10,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PhishGuard</title>
+<title>PhishGuard - Phishing URL Detection Tool</title>
+
+<meta name="description" content="Detect phishing websites instantly with PhishGuard. Analyze suspicious URLs and stay safe from cyber threats.">
 
 <link rel="stylesheet" href="css/style.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
 p {
   text-align: justify;
   line-height: 1.6;
 }
+
+.image-box {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  opacity: 0.95;
+}
 </style>
+
 </head>
 
 <body>
 
 <nav class="navbar">
-
 <div class="logo">PhishGuard</div>
 
 <div class="menu-toggle" onclick="toggleMenu()">
@@ -41,17 +56,13 @@ p {
 <li><a href="contact.html">Contact</a></li>
 <li><a href="privacy.html">Privacy</a></li>
 </ul>
-
 </nav>
 
 
+<!-- TOOL SECTION -->
 <section class="section">
-
 <div class="home-card">
-
 <h1>Phishing URL Detection</h1>
-
-
 
 <div class="input-row">
 <input type="text" id="url" placeholder="Enter URL to check">
@@ -64,16 +75,14 @@ p {
 </div>
 
 </div>
-
 </section>
 
 
+<!-- BASIC INFO -->
 <section class="section about">
-
 <div class="about-wrapper">
 
 <div class="about-card">
-
 <h2>What is Phishing?</h2>
 
 <p>
@@ -86,11 +95,14 @@ These attacks often involve fake login pages, misleading domain names,
 and malicious links designed to trick users.
 </p>
 
+<div class="image-box">
+<img src="img\Suspicious fake banking login page.png" alt="Phishing website example">
+</div>
+
 </div>
 
 
 <div class="about-card">
-
 <h2>How PhishGuard Helps</h2>
 
 <p>
@@ -104,11 +116,275 @@ This allows users to quickly determine whether a website
 may be safe or potentially malicious.
 </p>
 
+<div class="image-box">
+<img src="img\ChatGPT Image Apr 11, 2026, 10_38_33 AM.png" alt="URL analysis process">
 </div>
 
 </div>
 
+</div>
 </section>
+
+<section class="section">
+<div class="about-wrapper">
+
+<div class="about-card">
+<h2>Types of Phishing Attacks</h2>
+
+<p>
+Phishing attacks come in many different forms, each designed to exploit
+human behavior and trust. Understanding these types can help users
+recognize threats more effectively and avoid becoming victims.
+</p>
+
+<h3>1. Email Phishing</h3>
+<p>
+Email phishing is the most common type of attack. Cybercriminals send
+emails that appear to come from trusted organizations like banks,
+online services, or government agencies.
+</p>
+
+<p>
+These emails often contain urgent messages such as account suspension
+warnings or security alerts, prompting users to click on malicious links.
+</p>
+
+<div class="image-box">
+<img src="img\Phishing email warning on laptop screen.png" alt="Email phishing example showing fake login email">
+</div>
+
+
+<h3>2. Spear Phishing</h3>
+<p>
+Spear phishing targets specific individuals or organizations. Unlike
+generic phishing emails, these attacks are highly personalized and
+often include real names, job roles, or company details.
+</p>
+
+<p>
+Because of this personalization, spear phishing attacks are much more
+convincing and dangerous.
+</p>
+
+<div class="image-box">
+<img src="img\spear.png" alt="Targeted spear phishing attack example">
+</div>
+
+
+<h3>3. Smishing (SMS Phishing)</h3>
+<p>
+Smishing involves sending phishing messages through SMS or messaging
+apps. These messages often contain fake delivery updates, bank alerts,
+or prize notifications.
+</p>
+
+<p>
+Users are tricked into clicking malicious links or calling fraudulent numbers.
+</p>
+
+<div class="image-box">
+<img src="img\Beware of suspicious delivery scams.png" alt="SMS phishing example message">
+</div>
+
+
+<h3>4. Vishing (Voice Phishing)</h3>
+<p>
+Vishing uses phone calls to deceive victims. Attackers pretend to be
+bank representatives, tech support agents, or government officials.
+</p>
+
+<p>
+They attempt to extract sensitive information such as OTPs, passwords,
+or credit card details.
+</p>
+
+<div class="image-box">
+<img src="img\Suspicious call alert on smartphone.png" alt="Voice phishing scam call illustration">
+</div>
+
+
+<h3>5. Clone Phishing</h3>
+<p>
+Clone phishing involves copying a legitimate email and replacing its
+links or attachments with malicious ones.
+</p>
+
+<p>
+Since the email appears identical to a real message, users are more
+likely to trust it.
+</p>
+
+<div class="image-box">
+<img src="img\Email phishing vs real comparison.png" alt="Clone phishing email comparison">
+</div>
+
+</div>
+
+</div>
+</section>
+<!-- NEW CONTENT -->
+<section class="section">
+<div class="about-wrapper">
+
+<div class="about-card">
+<h2>Why Phishing Attacks Are Dangerous</h2>
+
+<p>
+Phishing attacks are one of the most widespread cyber threats today.
+Attackers create fake websites that look identical to trusted platforms.
+</p>
+
+<p>
+These fake pages trick users into entering sensitive information like
+passwords, credit card details, or personal data.
+</p>
+
+<p>
+Even experienced users can be fooled due to highly realistic designs.
+</p>
+<div class="image-box">
+<img src="img\Phishing attack in the digital dark.png" alt="Clone phishing email comparison">
+</div>
+</div>
+
+
+<div class="about-card">
+
+<h2>How Our Detection System Works</h2>
+
+<p>
+PhishGuard uses a multi-layered analysis approach to evaluate whether a URL is safe or potentially malicious. Instead of relying on a single factor, the system combines several detection techniques to improve accuracy and reliability.
+</p>
+
+<p>
+When a user enters a URL, the system begins by analyzing the <strong>structure of the domain</strong>. This includes checking for unusual patterns such as excessive subdomains, misspelled brand names, or the use of misleading characters (for example, replacing “l” with “I” to mimic trusted domains).
+</p>
+
+<p>
+The tool also evaluates <strong>URL patterns and length</strong>. Phishing URLs are often unusually long or contain random strings, encoded characters, or suspicious keywords designed to hide their true purpose.
+</p>
+
+<p>
+Another important factor is <strong>redirection behavior</strong>. Many phishing websites use multiple redirects to disguise the final destination. PhishGuard detects these redirection chains and flags suspicious behavior that may indicate malicious intent.
+</p>
+
+<p>
+In addition, the system scans for <strong>high-risk keywords</strong> commonly used in phishing attacks, such as “login”, “verify”, “secure”, or “update account”, especially when combined with unknown or untrusted domains.
+</p>
+
+<p>
+PhishGuard also checks for <strong>basic security signals</strong>, such as whether the website uses HTTPS. While HTTPS alone does not guarantee safety, its absence can be a strong warning sign.
+</p>
+
+<p>
+All of these features are processed together using a trained machine learning model. The model evaluates patterns learned from known phishing and legitimate websites to generate a confidence score.
+</p>
+
+<p>
+Finally, the system provides a clear result indicating whether the URL is likely safe or potentially harmful, helping users make informed decisions before interacting with unknown links.
+</p>
+
+<p>
+This layered approach ensures that detection is not based on a single rule, but on a combination of multiple risk indicators, making PhishGuard more effective against modern phishing techniques.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- SIGNS -->
+<section class="section">
+<div class="about-wrapper">
+
+<div class="about-card">
+<h2>Common Signs of Phishing Websites</h2>
+
+<ul>
+<li>Misspelled domains (paypaI.com)</li>
+<li>Suspicious subdomains</li>
+<li>Urgent login requests</li>
+<li>Poor design or errors</li>
+<li>Unexpected redirects</li>
+</ul>
+
+<div class="image-box">
+<img src="img\ChatGPT Image Apr 11, 2026, 10_39_58 AM.png" alt="Phishing warning signs">
+</div>
+
+</div>
+
+
+<div class="about-card">
+<h2>Best Practices to Stay Safe</h2>
+
+<ul>
+<li>Use strong passwords</li>
+<li>Enable 2FA</li>
+<li>Avoid unknown links</li>
+<li>Verify URLs carefully</li>
+<li>Use security tools</li>
+</ul>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FINAL -->
+<div class="about-card">
+
+<h2>Why Choose PhishGuard?</h2>
+
+<p>
+PhishGuard is designed to provide a simple and effective way to detect phishing websites without requiring advanced technical knowledge. Whether you are a beginner or an experienced user, the tool helps you quickly analyze suspicious URLs and understand potential risks.
+</p>
+
+<p>
+Unlike basic checkers, PhishGuard focuses on <strong>real-world phishing indicators</strong> such as domain manipulation, suspicious URL patterns, and redirection behavior. This allows the system to identify threats that are commonly used in modern phishing attacks.
+</p>
+
+<p>
+The platform is built with a user-friendly interface, making it easy to use without any complicated setup or technical background. Users can simply enter a URL and receive a clear result within seconds.
+</p>
+
+<p>
+PhishGuard also follows a <strong>continuous improvement approach</strong>, meaning detection techniques are regularly refined based on evolving phishing trends and attack methods.
+</p>
+
+<p>
+Our goal is to make the internet safer by giving users a fast, reliable, and accessible tool to identify potential threats before they cause harm.
+</p>
+
+<ul>
+<li>✔ Easy to use for all users</li>
+<li>✔ Fast URL analysis</li>
+<li>✔ Based on real phishing patterns</li>
+<li>✔ No technical knowledge required</li>
+<li>✔ Continuously improving detection</li>
+</ul>
+
+</div>
+
+<div class="about-card">
+<h2>Frequently Asked Questions</h2>
+
+<p><strong>Is it accurate?</strong><br>
+No tool is perfect, but results are reliable.</p>
+
+<p><strong>Is it safe?</strong><br>
+Yes, URLs are analyzed securely.</p>
+
+<p><strong>Who can use it?</strong><br>
+Anyone from beginners to experts.</p>
+
+</div>
+
+</div>
+</section>
+
 
 <script src="js/app.js"></script>
 
