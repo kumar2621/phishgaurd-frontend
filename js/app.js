@@ -1,166 +1,142 @@
 /* ===== NAVBAR MOBILE TOGGLE ===== */
-
 function toggleMenu() {
-    const nav = document.getElementById("nav-links");
-    nav.classList.toggle("active");
+  const nav = document.getElementById("nav-links");
+  nav.classList.toggle("active");
 }
 
+/* ===== SSL REPORT FUNCTION (ADDED) ===== */
+async function getSSLReport(url) {
+  try {
+    const res = await fetch("https://phishguard-backend-v2yh.onrender.com/api/ssl", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ url })
+    });
+
+    return await res.json();
+  } catch (err) {
+    console.error("SSL Error:", err);
+    return {};
+  }
+}
 
 /* ===== PHISHING CHECK ===== */
 async function checkUrl() {
+  const urlInput = document.getElementById("url");
+  const result = document.getElementById("result");
+  const confidence = document.getElementById("confidence");
+  const button = document.querySelector(".check-btn");
 
-    const urlInput = document.getElementById("url");
-    const result = document.getElementById("result");
-    const confidence = document.getElementById("confidence");
-    const button = document.querySelector(".check-btn");
+  const url = urlInput.value.trim();
+  const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$/i;
 
-    const url = urlInput.value.trim();
-    const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$/i;
+  if (!url) return showResult("⚠️ Please enter a URL", "phishing");
+  if (!urlPattern.test(url)) return showResult("⚠️ Invalid URL format", "phishing");
 
-    if (!url) {
-        showResult("⚠️ Please enter a URL", "phishing");
-        return;
+  button.disabled = true;
+  button.innerText = "Checking...";
+  result.innerText = "⏳ Analyzing URL...";
+  confidence.innerText = "";
+
+  // ===== SSL LOADING STATE =====
+  if (document.getElementById("ssl-status")) {
+    document.getElementById("ssl-status").textContent = "🔄 Scanning...";
+  }
+  if (document.getElementById("ssl-issuer")) {
+    document.getElementById("ssl-issuer").textContent = "-";
+  }
+  if (document.getElementById("ssl-expiry")) {
+    document.getElementById("ssl-expiry").textContent = "-";
+  }
+
+  try {
+    const response = await fetch(
+      "https://phishguard-backend-v2yh.onrender.com/api/predict",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+      }
+    );
+
+    if (!response.ok) throw new Error("Server error");
+
+    const data = await response.json();
+
+    // ===== SSL INTEGRATION =====
+    const sslData = await getSSLReport(url);
+
+    const sslCard = document.getElementById("ssl-card");
+    if (sslCard) sslCard.style.display = "block";
+
+    // ===== EXISTING SSL FIELDS =====
+    const tlsEl = document.getElementById("ssl-status");
+    const issuerEl = document.getElementById("ssl-issuer");
+    const expiryEl = document.getElementById("ssl-expiry");
+
+    if (tlsEl) tlsEl.textContent = sslData.tls_version || "N/A";
+    if (issuerEl) issuerEl.textContent = sslData.issuer || "N/A";
+    if (expiryEl) expiryEl.textContent = sslData.valid_to || "N/A";
+
+    // ===== NEW SSL FIELDS (ADDED) =====
+    const domainEl = document.getElementById("ssl-domain");
+    const ipEl = document.getElementById("ssl-ip");
+    const issuedEl = document.getElementById("ssl-issued");
+    const cipherEl = document.getElementById("ssl-cipher");
+    const hstsEl = document.getElementById("ssl-hsts");
+
+    if (domainEl) domainEl.textContent = sslData.domain || "N/A";
+    if (ipEl) ipEl.textContent = sslData.ip || "N/A";
+    if (issuedEl) issuedEl.textContent = sslData.issued_to || "N/A";
+    if (cipherEl) cipherEl.textContent = sslData.cipher || "N/A";
+    if (hstsEl) hstsEl.textContent = sslData.hsts || "Not Enabled";
+
+    // ===== ORIGINAL RESULT =====
+    if (data.prediction === "Phishing") {
+      showResult("🔴 PHISHING DETECTED", "phishing");
+    } else {
+      showResult("🟢 SAFE URL", "safe");
     }
 
-    if (!urlPattern.test(url)) {
-        showResult("⚠️ Invalid URL format", "phishing");
-        return;
+    confidence.innerText =
+      `Confidence: ${data.confidence}% | Risk Level: ${data.risk_level}`;
+
+    // ===== FINAL COMBINED RESULT =====
+    let finalMessage = "";
+    let finalType = "safe";
+
+    if (data.prediction === "Phishing") {
+      finalMessage = "🔴 DANGEROUS";
+      finalType = "phishing";
+    } else if (!sslData.tls_version || !sslData.issuer) {
+      finalMessage = "⚠️ SUSPICIOUS";
+      finalType = "phishing";
+    } else {
+      finalMessage = "🟢 SAFE";
+      finalType = "safe";
     }
 
-    button.disabled = true;
-    button.innerText = "Checking...";
+    showResult(finalMessage, finalType);
 
-    result.innerText = "⏳ Analyzing URL...";
+  } catch (error) {
+    console.error(error);
+    showResult("❌ Backend not reachable", "phishing");
     confidence.innerText = "";
-
-    try {
-
-        const response = await fetch(
-            "https://phishguard-backend-v2yh.onrender.com/api/predict",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ url: url })
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Server error");
-        }
-
-        const data = await response.json();
-
-        if (data.prediction === "Phishing") {
-            showResult("🔴 PHISHING DETECTED", "phishing");
-        } else {
-            showResult("🟢 SAFE URL", "safe");
-        }
-
-        confidence.innerText =
-            "Confidence: " + data.confidence + "% | Risk Level: " + data.risk_level;
-
-    } catch (error) {
-
-        console.error(error);
-        showResult("❌ Backend not reachable", "phishing");
-        confidence.innerText = "";
-
-    } finally {
-
-        button.disabled = false;
-        button.innerText = "Check";
-
-    }
+  } finally {
+    button.disabled = false;
+    button.innerText = "Check";
+  }
 }
-
 
 /* ===== RESULT UI HANDLER ===== */
 function showResult(message, type) {
+  const result = document.getElementById("result");
+  result.className = "result-card";
 
-    const result = document.getElementById("result");
+  if (type === "safe") result.classList.add("safe-card");
+  else result.classList.add("phishing-card");
 
-    result.className = "result-card";
-
-    if (type === "safe") {
-        result.classList.add("safe-card");
-    } else {
-        result.classList.add("phishing-card");
-    }
-
-    result.innerHTML = message;
+  result.innerHTML = message;
 }
-
-
-/* ===== CONTACT FORM SUBMISSION ===== */
-document.addEventListener("DOMContentLoaded", function () {
-
-    const form = document.getElementById("contactForm");
-    const sendBtn = form?.querySelector("button");
-
-    if (!form) {
-        console.error("contactForm not found");
-        return;
-    }
-
-    form.addEventListener("submit", async function (e) {
-
-        e.preventDefault();
-
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
-
-        if (!name || !email || !message) {
-            alert("Please fill all fields");
-            return;
-        }
-
-        sendBtn.disabled = true;
-        sendBtn.innerText = "Sending...";
-
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
-
-        try {
-
-            const response = await fetch(
-                "https://phishguard-backend-a8yw.onrender.com/api/feedback",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ name, email, message }),
-                    signal: controller.signal
-                }
-            );
-
-            clearTimeout(timeout);
-
-            if (!response.ok) {
-                throw new Error("Server error");
-            }
-
-            alert("✅ Message sent successfully!");
-            form.reset();
-
-        } catch (err) {
-
-            if (err.name === "AbortError") {
-                alert("❌ Server timeout. Please try again later.");
-            } else {
-                alert("❌ Failed to send message.");
-            }
-
-        } finally {
-
-            sendBtn.disabled = false;
-            sendBtn.innerText = "Send";
-
-        }
-
-    });
-
-});
