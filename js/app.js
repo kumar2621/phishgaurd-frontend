@@ -48,41 +48,48 @@ function hasUnicodeDomain(input) {
 }
 
 /* ===== SSL REPORT FUNCTION ===== */
-async function getSSLReport(url) {
-  try {
-    const res = await fetchWithTimeout(
-      `${BACKEND_BASE_URL}/api/ssl`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
+async function getSSLReport(url, attempts = 2) {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetchWithTimeout(
+        `${BACKEND_BASE_URL}/api/ssl`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ url })
         },
-        body: JSON.stringify({ url })
-      },
-      12000 // 12-second timeout for SSL inspection
-    );
+        14000
+      );
 
-    if (!res.ok) {
+      if (res.ok) {
+        const json = await res.json();
+        // If successfully retrieved SSL details, return immediately
+        if (json && json.success) {
+          return json;
+        }
+        // If not successful and retry is available, try once more
+        if (i < attempts - 1) continue;
+        return json;
+      }
+    } catch (err) {
+      if (i < attempts - 1) {
+        continue;
+      }
+      const isTimeout = err.name === "AbortError";
+      console.error("SSL Error:", err);
       return {
         success: false,
-        error_type: "HTTP_ERROR",
-        error: `Server responded with status ${res.status}`
+        error_type: isTimeout ? "TIMEOUT" : "NETWORK_ERROR",
+        error: isTimeout
+          ? "SSL scan timed out (target server took too long)"
+          : "Failed to connect to SSL scanner"
       };
     }
-
-    return await res.json();
-  } catch (err) {
-    const isTimeout = err.name === "AbortError";
-    console.error("SSL Error:", err);
-    return {
-      success: false,
-      error_type: isTimeout ? "TIMEOUT" : "NETWORK_ERROR",
-      error: isTimeout
-        ? "SSL scan timed out (target server took too long)"
-        : "Failed to connect to SSL scanner"
-    };
   }
 }
+
 
 /* ===== PHISHING CHECK ===== */
 async function checkUrl() {
